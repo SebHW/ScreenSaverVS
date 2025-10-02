@@ -41,21 +41,33 @@ Leave this running. You’ll connect the dev client to this server in a HOT SEC.
 
 ## 3) Build & install the Android **development build**
 
-One day we will make a _cloud_ build so it is downloadable on different devices from one place, but today is not that day and I am not that guy. Open the other terminal that u opened.
+You have **two** paths. Pick one.
 
-> IMPORTANT: If /andriod doesn't exist in the repo, then run the command beneath this one. But if it does can skip to this command
+### Option A — Local build (fast for day-to-day and if u have adroid studio, mine does not work so I don't do it this way)
+
+> First time only, generate native projects if `android/` doesn’t exist, it should its included in the repo but just in case we remove it further down the line:
 
 ```bash
 npx expo prebuild --platform android
 ```
 
-Now we have /android Then start your emulator (**Android Studio → Device Manager → Start**) or plug in a phone with **USB debugging** enabled, and run:
+Then start your emulator (**Android Studio → Device Manager → Start**) or plug in a phone with **USB debugging** enabled, and run:
 
 ```bash
 npx expo run:android
 ```
 
 This compiles locally, installs the app on the emulator/phone, and opens the **Expo Dev Client**.
+
+### Option B — Cloud build
+
+```bash
+eas login                # once
+eas build:configure      # once (creates eas.json)
+eas build --profile development --platform android
+```
+
+When it finishes, download/install the APK on your device or emulator and open it. I can't include a photo but it should have the screensavervs name.
 
 ---
 

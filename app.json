@@ -7,9 +7,10 @@
     "icon": "./assets/images/icon.png",
     "scheme": "screensavervs",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sebedi.ScreenSaverVs"
     },
     "android": {
       "adaptiveIcon": {

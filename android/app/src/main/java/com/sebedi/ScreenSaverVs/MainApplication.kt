@@ -25,6 +25,7 @@ class MainApplication : Application(), ReactApplication {
             val packages = PackageList(this).packages
             // Packages that cannot be autolinked yet can be added manually here, for example:
             // packages.add(MyReactNativePackage())
+            packages.add(com.sebedi.ScreenSaverVs.usage.UsageStatsPackage())
             return packages
           }
 

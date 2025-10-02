@@ -45,6 +45,19 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="screentime/index"
+        options={{
+          title: "Screentime",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "tv" : "tv-outline"}
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
