@@ -1,16 +1,17 @@
 // modules/usage-open.ts
 import * as IntentLauncher from "expo-intent-launcher";
-import { Linking, NativeModules, Platform } from "react-native";
+import { Linking, Platform } from "react-native";
 
-const Native = Platform.OS === "android" ? NativeModules.UsageStats : null;
+const USAGE_SETTINGS_ACTION =
+  IntentLauncher.ActivityAction?.USAGE_ACCESS_SETTINGS ??
+  "android.settings.USAGE_ACCESS_SETTINGS";
 
 export async function openUsageAccessSettings() {
-  if (!Native || Platform.OS !== "android") return;
+  if (Platform.OS !== "android") return;
   try {
-    const action: string = await Native.settingsAction(); // "android.settings.USAGE_ACCESS_SETTINGS"
-    await IntentLauncher.startActivityAsync(action);
+    await IntentLauncher.startActivityAsync(USAGE_SETTINGS_ACTION);
   } catch {
-    // Fallback: open app settings (user can navigate to "Special app access" from there)
+    // Fallback: open general app settings so users can navigate manually.
     await Linking.openSettings();
   }
 }

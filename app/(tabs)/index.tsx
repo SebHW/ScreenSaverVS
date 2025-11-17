@@ -1,10 +1,28 @@
-import { StyleSheet, Text, View } from "react-native";
+import { auth } from "@/FirebaseConfig";
+import { useRouter } from "expo-router";
+import { signOut } from "firebase/auth";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      router.replace("/(auth)");
+    } catch (err) {
+      console.error("Sign-out failed", err);
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Home screen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.text}>Sign Out</Text>
+      <TouchableOpacity onPress={handleSignOut}>
+        <Text>Sign Out</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 }
 
