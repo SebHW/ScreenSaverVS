@@ -1,19 +1,27 @@
 // Import the functions you need from the SDKs you need
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
-import { initializeApp } from "firebase/app";
+import { FirebaseOptions, initializeApp } from "firebase/app";
 import { getReactNativePersistence, initializeAuth } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+function getEnv(key: keyof NodeJS.ProcessEnv) {
+  const value = process.env[key];
+  if (!value) {
+    throw new Error(`Missing environment variable: ${key}`);
+  }
+  return value;
+}
+
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDcR4tWBEK-SIfGHNmcrjTGPXl-spfpz2Q",
-  authDomain: "screensavervs.firebaseapp.com",
-  projectId: "screensavervs",
-  storageBucket: "screensavervs.firebasestorage.app",
-  messagingSenderId: "325468703176",
-  appId: "1:325468703176:web:143bbb8fbf9ec091b298fd",
+const firebaseConfig: FirebaseOptions = {
+  apiKey: getEnv("EXPO_PUBLIC_FIREBASE_API_KEY"),
+  authDomain: getEnv("EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN"),
+  projectId: getEnv("EXPO_PUBLIC_FIREBASE_PROJECT_ID"),
+  storageBucket: getEnv("EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET"),
+  messagingSenderId: getEnv("EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID"),
+  appId: getEnv("EXPO_PUBLIC_FIREBASE_APP_ID"),
 };
 
 // Initialize Firebase

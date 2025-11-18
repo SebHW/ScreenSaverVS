@@ -23,6 +23,10 @@ You’ll run Metro locally and load the JS bundle into the dev client on your em
 git clone https://github.com/SebHW/ScreenSaverVS.git
 cd screensavervs
 npm install
+
+# add your firebase credentials
+cp .env.example .env
+# then edit .env and fill in the EXPO_PUBLIC_FIREBASE_* values from Firebase Console
 ```
 
 ---

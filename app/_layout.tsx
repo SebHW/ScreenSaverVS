@@ -1,4 +1,5 @@
 import { auth } from "@/FirebaseConfig";
+import { ThemeProvider, useTheme } from "@/theme/ThemeProvider";
 import {
   Stack,
   useRootNavigationState,
@@ -10,9 +11,18 @@ import { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 
 export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <AuthGate />
+    </ThemeProvider>
+  );
+}
+
+function AuthGate() {
   const router = useRouter();
   const segments = useSegments();
   const navigationState = useRootNavigationState();
+  const { theme } = useTheme();
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState(() => auth.currentUser);
 
@@ -42,18 +52,23 @@ export default function RootLayout() {
       <View
         style={{
           flex: 1,
-          backgroundColor: "#25292e",
+          backgroundColor: theme.colors.background,
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <ActivityIndicator size="large" color="#fff" />
+        <ActivityIndicator size="large" color={theme.colors.accent} />
       </View>
     );
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        contentStyle: { backgroundColor: theme.colors.background },
+      }}
+    >
       <Stack.Screen name="(auth)/index" />
       <Stack.Screen name="(tabs)" />
     </Stack>
